@@ -3,6 +3,7 @@
 import React from 'react';
 import { CreditCard, Calendar, CheckCircle2, RefreshCw } from 'lucide-react';
 import { superAdminService } from '../../../lib/services/superadmin.service';
+import { formatDate } from '../../../lib/utils/format';
 
 export default function SuperAdminSubscriptionsPage() {
   const subscriptions = superAdminService.getSubscriptions();
@@ -63,7 +64,7 @@ export default function SuperAdminSubscriptionsPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 font-mono text-zinc-400">
-                    {new Date(sub.currentPeriodEnd).toLocaleDateString()}
+                    {formatDate(sub.currentPeriodEnd)}
                   </td>
                   <td className="px-6 py-4">
                     <span className="flex items-center gap-1 text-emerald-400 font-semibold text-[11px]">

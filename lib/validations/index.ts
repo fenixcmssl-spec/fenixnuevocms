@@ -60,3 +60,15 @@ export const planUpdateSchema = z.object({
   maxProducts: z.number().int().positive(),
   features: z.array(z.string()),
 });
+
+// Aliases para compatibilidad con rutas API y servicios
+export const createProductSchema = productSchema.extend({
+  categoryName: z.string().optional(),
+});
+export const addDomainSchema = domainSchema;
+export const issueLicenseSchema = z.object({
+  tenantId: z.string().min(1, 'El ID de tenant es obligatorio'),
+  validDays: z.number().int().positive().default(365),
+  maxDomains: z.number().int().positive().default(1),
+  notes: z.string().optional(),
+});

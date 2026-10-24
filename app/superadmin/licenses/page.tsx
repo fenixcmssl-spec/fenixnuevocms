@@ -4,6 +4,7 @@ import React from 'react';
 import { Key, Sparkles, ShieldCheck, ShieldAlert, CheckCircle2 } from 'lucide-react';
 import { superAdminService } from '../../../lib/services/superadmin.service';
 import { fenixDb } from '../../../lib/db/client';
+import { formatDate } from '../../../lib/utils/format';
 
 export default function SuperAdminLicensesPage() {
   const [licenses, setLicenses] = React.useState(() => superAdminService.getLicenses());
@@ -65,7 +66,7 @@ export default function SuperAdminLicensesPage() {
               {createdLicense.licenseKey}
             </div>
             <p className="mt-2 text-zinc-400 text-[11px]">
-              Asignada a: <span className="text-white font-semibold">{createdLicense.tenantName}</span> &bull; Expira: {new Date(createdLicense.expiresAt).toLocaleDateString()}
+              Asignada a: <span className="text-white font-semibold">{createdLicense.tenantName}</span> &bull; Expira: {formatDate(createdLicense.expiresAt)}
             </p>
           </div>
         )}
@@ -161,10 +162,10 @@ export default function SuperAdminLicensesPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 font-mono text-zinc-500">
-                    {new Date(lic.issuedAt).toLocaleDateString()}
+                    {formatDate(lic.issuedAt)}
                   </td>
                   <td className="px-6 py-4 font-mono text-zinc-500">
-                    {new Date(lic.expiresAt).toLocaleDateString()}
+                    {formatDate(lic.expiresAt)}
                   </td>
                   <td className="px-6 py-4 text-right">
                     {lic.status === 'ACTIVE' ? (

@@ -6,6 +6,7 @@ import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
 import { Check, Flame, Shield, ArrowRight, Zap, Sparkles } from 'lucide-react';
 import { fenixDb } from '../../lib/db/client';
+import { formatNumber } from '../../lib/utils/format';
 
 export default function PlansPage() {
   const [billingCycle, setBillingCycle] = React.useState<'MONTHLY' | 'YEARLY'>('MONTHLY');
@@ -105,7 +106,7 @@ export default function PlansPage() {
                       </div>
                       <div className="flex justify-between text-zinc-300">
                         <span className="text-zinc-500">Productos Tienda:</span>
-                        <span className="font-semibold text-white">Hasta {plan.maxProducts.toLocaleString()}</span>
+                        <span className="font-semibold text-white">Hasta {formatNumber(plan.maxProducts)}</span>
                       </div>
                       <div className="flex justify-between text-zinc-300">
                         <span className="text-zinc-500">Almacenamiento:</span>

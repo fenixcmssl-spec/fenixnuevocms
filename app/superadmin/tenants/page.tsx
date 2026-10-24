@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Building2, Globe2, ShieldCheck, ArrowUpRight, AlertCircle, PlusCircle } from 'lucide-react';
 import { fenixDb } from '../../../lib/db/client';
 import { TenantDto } from '../../../lib/types/fenix';
+import { formatDate } from '../../../lib/utils/format';
 
 export default function SuperAdminTenantsPage() {
   const [tenants, setTenants] = React.useState<TenantDto[]>(() => fenixDb.getTenants());
@@ -94,7 +95,7 @@ export default function SuperAdminTenantsPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 font-mono text-zinc-500 text-[11px]">
-                    {new Date(t.createdAt).toLocaleDateString()}
+                    {formatDate(t.createdAt)}
                   </td>
                   <td className="px-6 py-4 text-right space-x-2">
                     <button

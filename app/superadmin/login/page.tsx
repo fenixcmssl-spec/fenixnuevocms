@@ -26,10 +26,20 @@ export default function SuperAdminLoginPage() {
 
     setIsLoading(true);
     try {
-      await new Promise((res) => setTimeout(res, 500));
-      router.push('/superadmin');
+      const res = await fetch('/api/auth/superadmin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, securityToken }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setErrorMessage(data.error || 'Credenciales de acceso no válidas o cuenta no autorizada.');
+      } else {
+        router.push('/superadmin');
+      }
     } catch (err: any) {
-      setErrorMessage('Error de autenticación en consola central.');
+      setErrorMessage('Error de comunicación con el servicio de autenticación.');
     } finally {
       setIsLoading(false);
     }

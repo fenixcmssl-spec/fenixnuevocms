@@ -101,7 +101,10 @@ export function resolveTenantBySession(
   }
 
   // Si es un usuario de tenant, debe coincidir exactamente su tenantId asignado en sesión
-  if (session.type === 'TENANT_USER') {
+  const isTenantUser = session.userType === 'TENANT_USER' || session.type === 'TENANT_USER';
+  const isSuperAdmin = session.userType === 'SUPERADMIN' || session.type === 'SUPERADMIN';
+
+  if (isTenantUser) {
     if (!session.tenantId) {
       return {
         success: false,
@@ -144,7 +147,7 @@ export function resolveTenantBySession(
   }
 
   // Si es SUPERADMIN y solicita un tenantId específico para soporte
-  if (session.type === 'SUPERADMIN' && requestedTenantId) {
+  if (isSuperAdmin && requestedTenantId) {
     const tenant = fenixDb.getTenantById(requestedTenantId);
     if (!tenant) {
       return {

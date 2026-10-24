@@ -57,16 +57,30 @@ export default function LoginPage() {
 
     setIsLoading(true);
     try {
-      // Simulate credential verification
-      await new Promise((res) => setTimeout(res, 400));
+      const endpoint = portalType === 'SUPERADMIN' ? '/api/auth/superadmin-login' : '/api/auth/tenant-login';
+      const payload =
+        portalType === 'SUPERADMIN'
+          ? { email, password }
+          : { email, password, requestedTenantId: selectedTenantId };
 
-      if (portalType === 'SUPERADMIN') {
-        router.push('/superadmin');
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setErrorMessage(data.error || 'Credenciales de acceso no válidas o cuenta no autorizada.');
       } else {
-        router.push(`/admin?tenant=${selectedTenantId}`);
+        if (portalType === 'SUPERADMIN') {
+          router.push('/superadmin');
+        } else {
+          router.push(`/admin?tenant=${selectedTenantId}`);
+        }
       }
     } catch (err: any) {
-      setErrorMessage('Credenciales inválidas o acceso no autorizado.');
+      setErrorMessage('Error de comunicación con el servicio de autenticación.');
     } finally {
       setIsLoading(false);
     }

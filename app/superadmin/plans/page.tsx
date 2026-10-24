@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Tag, Check, ArrowRight, ShieldCheck } from 'lucide-react';
 import { fenixDb } from '../../../lib/db/client';
+import { formatNumber } from '../../../lib/utils/format';
 
 export default function SuperAdminPlansPage() {
   const plans = fenixDb.getPlans();
@@ -62,7 +63,7 @@ export default function SuperAdminPlansPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-zinc-500">Máx. Productos:</span>
-                  <span className="font-semibold text-white">{p.maxProducts.toLocaleString()}</span>
+                  <span className="font-semibold text-white">{formatNumber(p.maxProducts)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-zinc-500">Almacenamiento:</span>

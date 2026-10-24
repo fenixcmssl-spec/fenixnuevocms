@@ -17,6 +17,7 @@ import {
   PlusCircle,
 } from 'lucide-react';
 import { fenixDb } from '../../lib/db/client';
+import { formatDate } from '../../lib/utils/format';
 
 export default function SuperAdminPage() {
   const tenants = fenixDb.getTenants();
@@ -179,7 +180,7 @@ export default function SuperAdminPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-zinc-500 font-mono">
-                      {new Date(tenant.createdAt).toLocaleDateString()}
+                      {formatDate(tenant.createdAt)}
                     </td>
                     <td className="px-6 py-4 text-right">
                       <Link

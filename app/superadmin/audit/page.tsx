@@ -3,6 +3,7 @@
 import React from 'react';
 import { ShieldAlert, AlertTriangle, Info, Clock, CheckCircle } from 'lucide-react';
 import { superAdminService } from '../../../lib/services/superadmin.service';
+import { formatDateTime } from '../../../lib/utils/format';
 
 export default function SuperAdminAuditPage() {
   const logs = superAdminService.getAuditLogs();
@@ -61,7 +62,7 @@ export default function SuperAdminAuditPage() {
                   <td className="px-6 py-4 font-mono text-zinc-400 text-[11px]">{log.actor}</td>
                   <td className="px-6 py-4 text-zinc-300 max-w-md">{log.details}</td>
                   <td className="px-6 py-4 font-mono text-zinc-500 text-[11px]">
-                    {new Date(log.timestamp).toLocaleString()}
+                    {formatDateTime(log.timestamp)}
                   </td>
                 </tr>
               ))}

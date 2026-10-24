@@ -3,6 +3,7 @@
 import React from 'react';
 import { Receipt, ShieldCheck, AlertCircle, CheckCircle } from 'lucide-react';
 import { superAdminService } from '../../../lib/services/superadmin.service';
+import { formatDateTime } from '../../../lib/utils/format';
 
 export default function SuperAdminPaymentsPage() {
   const payments = superAdminService.getPayments();
@@ -79,7 +80,7 @@ export default function SuperAdminPaymentsPage() {
                     {pay.verificationCode}
                   </td>
                   <td className="px-6 py-4 font-mono text-zinc-500 text-[11px]">
-                    {new Date(pay.date).toLocaleString()}
+                    {formatDateTime(pay.date)}
                   </td>
                 </tr>
               ))}

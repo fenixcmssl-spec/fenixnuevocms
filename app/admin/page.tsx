@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { fenixDb } from '../../lib/db/client';
 import { TenantDto, ProductDto } from '../../lib/types/fenix';
+import { formatDate } from '../../lib/utils/format';
 
 function TenantAdminContent() {
   const searchParams = useSearchParams();
@@ -417,7 +418,7 @@ function TenantAdminContent() {
                           {o.paymentVerificationId || 'Sin verificar'}
                         </td>
                         <td className="px-4 py-3 font-mono text-zinc-500">
-                          {new Date(o.createdAt).toLocaleDateString()}
+                          {formatDate(o.createdAt)}
                         </td>
                       </tr>
                     ))}
@@ -692,7 +693,7 @@ function TenantAdminContent() {
                         <td className="px-4 py-3 font-bold text-white">{page.title}</td>
                         <td className="px-4 py-3 uppercase font-mono text-red-400">{page.languageCode}</td>
                         <td className="px-4 py-3 font-mono text-zinc-500">
-                          {new Date(page.updatedAt).toLocaleDateString()}
+                          {formatDate(page.updatedAt)}
                         </td>
                       </tr>
                     ))}
